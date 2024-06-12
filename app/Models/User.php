@@ -18,6 +18,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'lastName',
         'email',
         'password',
     ];
@@ -43,5 +44,13 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    public function getFullNameAttribute()
+    {
+        return "$this->name $this->lastName";
+    }
+    public function isMinor()
+    {
+        return $this->age < 18 ? true : false;
     }
 }
