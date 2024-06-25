@@ -14,7 +14,7 @@ class ExampleTest extends TestCase
     {
         $response = $this->get('/');
 
-        $response->assertSeeInOrder(['Ecosystem', 'Vibrant']);
+        $response->assertSeeInOrder(['Vibrant', 'Ecosystem']);
     }
     public function test_user_has_age_attribute()
     {

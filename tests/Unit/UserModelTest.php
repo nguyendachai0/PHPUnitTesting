@@ -15,7 +15,7 @@ class UserModelTest extends TestCase
      */
     public function test_user_has_full_name_attribute(): void
     {
-        $user = User::create(['name' => 'Hai', 'lastName' => 'Nguyen', 'email' => 'haindfullstack@gmail.com', 'password' => 'secret']);
+        $user = User::create(['name' => 'Hai', 'lastName' => 'Nguyen', 'email' => 'haindfullstack@gmail.com', 'password' => 'secret', 'age' => 20]);
         $this->assertEquals('Hai Nguyen', $user->fullname);
     }
 }
