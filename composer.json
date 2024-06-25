@@ -44,8 +44,13 @@
             "@php artisan key:generate --ansi",
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
+<<<<<<< HEAD
         ]
         
+=======
+        ],
+"test": "vendor/bin/phpunit"
+>>>>>>> 2acddd5d7888954cefe973ff2578597e08700b4c
     },
     "extra": {
         "laravel": {
