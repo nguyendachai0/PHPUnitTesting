@@ -31,7 +31,7 @@ jobs:
       - name: Create .htaccess file
         run: |
           echo "RewriteEngine On" > .htaccess
-          echo "RewriteBase /" > .htaccess
+          echo "RewriteBase /" >> .htaccess
           echo "RewriteCond %{THE_REQUEST} /public/([^\s?]*) [NC]" >> .htaccess
           echo "RewriteRule ^ %1 [L,NE,R=302]" >> .htaccess
           echo "RewriteRule ^((?!public/).*)$ public/$1 [L,NC]" >> .htaccess
@@ -42,10 +42,7 @@ jobs:
           fi
 
       - name: Generate application key
-        run: |
-          if ! grep -q "APP_KEY" .env || grep -q "APP_KEY=SomeRandomString" .env; then
-            php artisan key:generate
-          fi
+        run: php artisan key:generate
       - name: Install Composer dependencies
         run: composer install --no-dev --prefer-dist --no-progress --no-interaction
 
