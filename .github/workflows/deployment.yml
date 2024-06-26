@@ -35,6 +35,9 @@ jobs:
           echo "RewriteCond %{THE_REQUEST} /public/([^\s?]*) [NC]" >> .htaccess
           echo "RewriteRule ^ %1 [L,NE,R=302]" >> .htaccess
           echo "RewriteRule ^((?!public/).*)$ public/$1 [L,NC]" >> .htaccess
+      - name: Install Composer dependencies
+        run: composer install --no-dev --prefer-dist --no-progress --no-interaction
+
       - name: Copy .env.example to .env
         run: |
           if [ ! -f .env ]; then
@@ -42,9 +45,10 @@ jobs:
           fi
 
       - name: Generate application key
-        run: php artisan key:generate
-      - name: Install Composer dependencies
-        run: composer install --no-dev --prefer-dist --no-progress --no-interaction
+        run: |
+          if ! grep -q "APP_KEY" .env || grep -q "APP_KEY=SomeRandomString" .env; then
+            php artisan key:generate
+          fi
 
       - name: Upload to InfinityFree
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
