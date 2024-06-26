@@ -39,7 +39,7 @@ jobs:
         run: composer install --no-dev --prefer-dist --no-progress --no-interaction
 
       - name: Create .env file
-        run: echo ${{secrets.ENV}} > .env
+        run: echo "${{secrets.ENV}}" > .env
 
       - name: Generate application key
         run: |
