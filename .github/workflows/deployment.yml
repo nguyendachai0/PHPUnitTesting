@@ -38,11 +38,8 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --no-dev --prefer-dist --no-progress --no-interaction
 
-      - name: Copy .env.example to .env
-        run: |
-          if [ ! -f .env ]; then
-            cp .env.example .env
-          fi
+      - name: Create .env file
+        run: echo ${{secrets.ENV}} > .env
 
       - name: Generate application key
         run: |
